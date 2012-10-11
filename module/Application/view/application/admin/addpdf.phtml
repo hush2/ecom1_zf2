@@ -1,0 +1,34 @@
+<? $pageTitle = $this->layout()->pageTitle = 'Add a PDF' ?>
+
+<h3><?= $pageTitle ?></h3>
+
+<?php if ($this->hasFlash('success')): ?>
+    <h4 class='success'>The PDF has been added!</h4>
+<?php endif ?>
+
+<?php $form->setAttribute('action', $this->basePath('/add_pdf'))
+           ->setAttribute('enctype', 'multipart/form-data'); ?>
+
+<fieldset><legend>Fill out the form to add a PDF to the site:</legend>
+    <?= $this->form()->openTag($form) ?>
+    <p>
+    <?= $this->formLabel($form->get('title')) ?><br/>
+    <?= $this->formText($form->get('title')) ?>
+    <?= $this->formElementError($form->get('title')) ?>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('description')) ?><br/>
+    <?= $this->formTextArea($form->get('description')) ?>
+    <?= $this->formElementError($form->get('description')) ?>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('pdf')) ?><br/>
+    <?= $this->formFile($form->get('pdf')) ?>
+    <?= $this->formElementError($form->get('pdf')) ?> <small>PDF only, 1MB Limit.</small>
+    </p>
+    <p>
+    <?= html_entity_decode($this->formRow($form->get('submit'))) ?>
+    </p>
+</fieldset>
+
+<?= $this->form()->closeTag($form) ?>

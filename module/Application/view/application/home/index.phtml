@@ -1,0 +1,15 @@
+<?php $this->pageTitle = 'Welcome' ?>
+
+<h3><?= $this->pageTitle ?></h3>
+<p>Welcome to Knowledge is Power, a site dedicated to keeping you up to date on the Web security and programming information you need to know.</p>
+
+<h3>Most Popular Pages</h3>
+<p>
+<ol>
+    <?php foreach($mostPopular as $page): ?>
+        <li><h4><a href='<?= $this->basePath("page/$page->id") ?>'><?= $page->title ?></a></h4></li>
+    <?php endforeach ?>
+</ol>
+</p>
+
+

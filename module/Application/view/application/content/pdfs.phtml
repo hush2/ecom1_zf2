@@ -1,0 +1,24 @@
+<?php $pageTitle = $this->layout()->pageTitle = 'PDF Guides' ?>
+
+<h3><?= $pageTitle ?></h3>
+
+<?php if (!$this->auth()->hasIdentity()): ?>
+    <p class='error'>Thank you for your interest in this content. You must be logged in as a registered user to view any of the PDFs listed below.</p>
+
+<?php elseif ($this->auth()->getIdentity()->isExpired): ?>
+    <p class='error'>Thank you for your interest in this content. Unfortunately your account has expired. Please <a href="<?= $this->baseUrl('renew') ?>">renew your account</a> in order to view any of the PDFs listed below.</p>
+
+<?php endif ?>
+
+<?php if (count($titles) < 1): ?>
+    <p>There are currently no PDFs available to view. Please check back again!</p>
+
+<?php else: ?>
+    <?php foreach ($titles as $title): ?>
+        <div>
+            <h4><a href='<?= $this->basePath("view_pdf/{$title->tmp_name}") ?>'><?= $title->title ?> (<?= $title->size ?> kb)</a></h4>
+            <p><?= $title->description ?></p>
+        </div>
+    <?php endforeach ?>
+
+<?php endif ?>

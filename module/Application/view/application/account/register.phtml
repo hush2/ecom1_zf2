@@ -1,0 +1,50 @@
+<?php $pageTitle = $this->layout()->pageTitle = 'Register'  ?>
+
+<?php if ($this->hasFlash('success')): ?>
+
+    <h3>Thanks!</h3>
+    <p>Thank you for registering! To complete the process, please now click the button below so that you may pay for your site access via PayPal. The cost is $10 (US) per year.</p>
+
+<?php else: ?>
+
+    <?php $form->setAttribute('id', 'register')
+               ->setAttribute('action', $this->basePath('/register'));
+    ?>
+    <h3><?= $pageTitle ?></h3>
+    <p>Access to the site's content is available to registered users at a cost of $10.00 (US) per year. Use the form below to begin the registration process. <strong>Note: All fields are required.</strong> After completing this form, you'll be presented with the opportunity to securely pay for your yearly subscription via <a href="http://www.paypal.com">PayPal</a>.</p>
+
+    <?= $this->form()->openTag($form) ?>
+    <p>
+    <?= $this->formLabel($form->get('first_name')) ?><br/>
+    <?= $this->formText($form->get('first_name')) ?>
+    <?= $this->formElementError($form->get('first_name')) ?>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('last_name')) ?><br/>
+    <?= $this->formText($form->get('last_name')) ?>
+    <?= $this->formElementError($form->get('last_name')) ?>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('username')) ?><br/>
+    <?= $this->formText($form->get('username')) ?>
+    <?= $this->formElementError($form->get('username')) ?> <small>Only letters and numbers are allowed.</small></p>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('email')) ?><br/>
+    <?= $this->formText($form->get('email')) ?>
+    <?= $this->formElementError($form->get('email')) ?>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('pass')) ?><br/>
+    <?= $this->formPassword($form->get('pass')) ?>
+    <?= $this->formElementError($form->get('pass')) ?> <small>Must be between 6 and 20 characters long, with at least one lowercase letter, one uppercase letter, and one number.</small></p>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('pass2')) ?><br/>
+    <?= $this->formPassword($form->get('pass2')) ?>
+    <?= $this->formElementError($form->get('pass2')) ?>
+    </p>
+    <?= html_entity_decode($this->formRow($form->get('submit'))) ?>
+    <?= $this->form()->closeTag($form) ?>
+
+<?php endif ?>

@@ -1,0 +1,26 @@
+<h3><?= $this->pageTitle ?></h3>
+
+<?php if (!$this->auth()->hasIdentity()): ?>
+
+    <p class='error'>Thank you for your interest in this content. You must be logged in as a registered user to view site content.</p>
+
+<?php elseif ($this->auth()->getIdentity()->isExpired): ?>
+
+    <p class="error">Thank you for your interest in this content, but your account is no longer current. Please <a href='<?= $this->basePath('/renew') ?>'>renew your account</a> in order to view this page in its entirety</p>
+
+<?php endif ?>
+
+<?php if (count($this->titles) < 1): ?>
+
+    <p>There are currently no pages of content associated with this category. Please check back again!</p>
+
+<?php else: ?>
+
+    <?php foreach($this->titles as $title): ?>
+        <div>
+            <h4><a href=<?= $this->basePath("page/{$title->id}") ?>><?= $this->escapeHtml($title->title) ?></a></h4>
+            <p><?= $this->escapeHtml($title->description) ?></p>
+        </div>
+    <?php endforeach ?>
+
+<?php endif ?>

@@ -1,0 +1,39 @@
+<?php $pageTitle = $this->layout()->pageTitle = $this->page->title  ?>
+
+<h3><?= $pageTitle ?></h3>
+
+<?php if (!$this->auth()->hasIdentity()): ?>
+    <p class='error'>Thank you for your interest in this content. You must be a logged in as a registered user to view this page in its entirety.</p>
+    <div><?= $this->page->description ?></div>
+
+<?php else: ?>
+
+    <?php if ($this->auth()->getIdentity()->isExpired): ?>
+        <p class="error">Thank you for your interest in this content, but your account is no longer current. Please <a href='<?= $this->basePath('renew') ?>'>renew your account</a> in order to view this page in its entirety</p>
+        <div>
+            <?= $this->page->description ?>
+        </div>
+    <?php else: ?>
+        <?php
+        $heart = '<img src="'.$this->basePath('images/heart_48.png').'" align="middle">';
+        $cross = '<img src="'.$this->basePath('images/cross_48.png').'" align="middle">';
+        ?>
+        <p>
+        <?php if ($this->hasFlash('added')): ?>
+        <?= $heart ?>This has been added to your favorites!<a href='<?= $this->basePath("/remove_from_favorites/{$this->page->id}") ?>'><?= $cross ?></a>
+
+        <?php elseif ($this->hasFlash('removed')): ?>
+            This page has been removed from your favorites!<?= $cross ?>
+
+        <?php elseif ($isFavorite): ?>
+            <?= $heart ?>This is a favorite! <a href='<?= $this->basePath("/remove_from_favorites/{$this->page->id}") ?>'><?= $cross ?></a>
+
+        <?php else: ?>
+            Make this a favorite! <a href='<?= $this->basePath("/add_to_favorites/{$this->page->id}") ?>'><?= $heart ?></a>
+        <?php endif ?>
+        </p>
+        <div>
+            <?= nl2br($this->page->content) ?>
+        </div>
+    <?php endif ?>
+<?php endif ?>

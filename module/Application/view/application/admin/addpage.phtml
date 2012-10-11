@@ -1,0 +1,38 @@
+<? $pageTitle = $this->layout()->pageTitle = 'Add a Site Content Page' ?>
+
+<h3><?= $pageTitle ?></h3>
+
+<?php if ($this->hasFlash('success')): ?>
+    <h4 class='success'>The page has been added!</h4>
+<?php endif ?>
+
+<?php $form->setAttribute('action', $this->basePath('/add_page')) ?>
+
+<fieldset><legend>Fill out the form to add a page of content:</legend>
+    <?= $this->form()->openTag($form) ?>
+    <p>
+    <?= $this->formLabel($form->get('title')) ?><br/>
+    <?= $this->formText($form->get('title')) ?>
+    <?= $this->formElementError($form->get('title')) ?>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('categoryId')) ?><br/>
+    <?= $this->formSelect($form->get('categoryId')) ?>
+    <?= $this->formElementError($form->get('categoryId')) ?>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('description')) ?><br/>
+    <?= $this->formTextArea($form->get('description')) ?>
+    <?= $this->formElementError($form->get('description')) ?>
+    </p>
+    <p>
+    <?= $this->formLabel($form->get('content')) ?><br/>
+    <?= $this->formTextArea($form->get('content')) ?>
+    <?= $this->formElementError($form->get('content')) ?>
+    </p>
+    <?= html_entity_decode($this->formRow($form->get('submit'))) ?>
+</fieldset>
+
+<?= $this->form()->closeTag($form) ?>
+
+<? include '_editor.php' ?>

@@ -1,0 +1,33 @@
+<?php $pageTitle = $this->layout()->pageTitle = 'Your Viewing History' ?>
+
+<h3><?= $pageTitle ?></h3>
+
+<h4>Pages You Have Viewed</h4>
+
+<?php if (count($pages) < 1): ?>
+
+    <p>You have not yet viewed any pages.</p>
+
+<?php else: ?>
+    <?php foreach ($pages as $page): ?>
+        <div>
+        <h4><a href='<?= $this->basePath("page/{$page->id}") ?>'><?= $page->title ?></a></h4>
+        <p><?= $page->description ?><br />Last viewed: <?= $page->date ?></p>
+        </div>
+    <?php endforeach ?>
+<?php endif ?>
+
+<h4>PDFs You Have Viewed</h4>
+
+<?php if (count($pdfs) < 1): ?>
+    <p>You have not yet viewed any PDFs.</p>
+
+<?php else: ?>
+    <?php foreach($pdfs as $pdf): ?>
+        <div>
+            <h4><a href='<?= $this->basePath("view_pdf/{$pdf->tmp_name}") ?>'><?= $pdf->title ?></a></h4>
+            <p><?= $pdf->description ?><br />Last viewed: <?= $pdf->date ?></p>
+        </div>
+    <?php endforeach ?>
+<?php endif ?>
+

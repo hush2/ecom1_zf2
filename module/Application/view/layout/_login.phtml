@@ -1,0 +1,25 @@
+<div class="title">
+    <h4>Login</h4>
+</div>
+
+<?php $form->setAttribute('action', $this->basePath('login')) ?>
+
+<?= $this->form()->openTag($form) ?>
+    <p>
+    <?php if (isset($form->failed)): ?>
+        <span class='error'>The email address and password do not match those on file.</span><br/>
+    <?php endif ?>
+
+    <?= $this->formLabel($form->get('login_email')) ?><br/>
+    <?= $this->formText($form->get('login_email')) ?>
+    <?= $this->formElementError($form->get('login_email')) ?>
+    <br/>
+    <?= $this->formLabel($form->get('login_password')) ?><br/>
+    <?= $this->formPassword($form->get('login_password')) ?>
+    <?= $this->formElementError($form->get('login_password')) ?>
+
+    <a href="<?= $this->basePath('forgot_password') ?>">Forgot?</a>
+    <?= html_entity_decode($this->formRow($form->get('submit'))) ?>
+    </p>
+<?= $this->form()->closeTag() ?>
+

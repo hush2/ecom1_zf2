@@ -1,0 +1,13 @@
+<?php $pageTitle = $this->layout()->pageTitle = $pdf->title ?>
+
+<h3><?= $pageTitle ?></h3>
+
+<?php if (!$this->auth()->hasIdentity()): ?>
+    <p class='error'>Thank you for your interest in this content. You must be logged in as a registered user to view any of the PDFs listed below.</p>
+
+<?php elseif ($this->auth()->getIdentity()->isExpired): ?>
+    <p class='error'>Thank you for your interest in this content. Unfortunately your account has expired. Please <a href="<?= $this->basePath('renew') ?>">renew your account</a> in order to view any of the PDFs listed below.</p>
+
+<?php endif ?>
+
+<?= $pdf->description ?>

@@ -1,0 +1,20 @@
+<?php $pageTitle = $this->layout()->pageTitle = 'Your Favorite Pages' ?>
+
+<h3><?= $pageTitle ?></h3>
+
+<?php if (count($titles) < 1): ?>
+
+    <p>There are currently no pages of content available. Please check back again!</p>
+
+<?php else: ?>
+
+    <?php foreach ($titles as $title): ?>
+
+        <div>
+            <h4><a href='<?= $this->basePath("/page/{$title->id}") ?>'><?= $title->title ?></a></h4>
+            <p><?= $title->description ?></p>
+        </div>
+
+    <?php endforeach ?>
+
+<?php endif ?>
